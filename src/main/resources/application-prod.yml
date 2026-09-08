@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://${AIVEN_MYSQL_HOST}:${AIVEN_MYSQL_PORT}/${AIVEN_MYSQL_DB}?sslMode=REQUIRED&serverTimezone=UTC
+    username: ${AIVEN_MYSQL_USER}
+    password: ${AIVEN_MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 5000
+      maximum-pool-size: 5
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:validate}
+    show-sql: false

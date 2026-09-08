@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: simple-back
+  profiles:
+    default: local
+
+server:
+  port: ${PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+
+app:
+  message: ${APP_MESSAGE:Hello Spring Boot 4 Infra Practice!}
