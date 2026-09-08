@@ -1,0 +1,28 @@
+# 이 작업의 이름
+name: 도커 빌드 및 GHCR 푸시
+
+# 언제 이 워크플로우가 발동/실행
+on:
+  push:
+    branches: [ "main" ]
+  # main 브랜치에 푸시되면
+
+env:
+  # 레지스트리 주소
+  REGISTRY: ghcr.io
+  # 이미지 이름 -> 곧 레포지토리 이름
+  IMAGE_NAME: ${{ github.repository }}
+  # github.* <- 기본 내장 속성에서 repository 이름을 불러와서 사용
+
+jobs:
+  # job의 이름
+  build-and-push:
+    # 실행환경 -> ubuntu의 최신 lts 버전 (github actions에서 제공하는 ubuntu 이미지)
+    runs-on: ubuntu-latest
+    # secrets.GITHUB_TOKEN <- github actions에서 제공하는 토큰
+    # 이 토큰이 이 job 내부에서 어느 정도의 권한을 가지게 되느냐를 결정
+    permissions:
+      # 코드를 읽을 수 있게 함
+      contents: read
+      # 레지스트리(패키지)에 접근하여 새로운 걸 등록할 수 있는 권한
+      packages: write
